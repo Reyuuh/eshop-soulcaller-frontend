@@ -1,1 +1,9 @@
-console.log("Footer component loaded");
+import React from 'react'
+
+const Navbar = () => {
+  return (
+    <div>Navbar</div>
+  )
+}
+
+export default Navbar
