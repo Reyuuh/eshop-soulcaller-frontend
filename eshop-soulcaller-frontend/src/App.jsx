@@ -3,19 +3,21 @@ import './App.css'
 import Navbar from './components/Navbar/Navbar.jsx'
 import Footer from './components/Footer/Footer.jsx' 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import About from './pages/about/About.jsx'
-// import Home from './pages/home/Home.jsx'
-// import Products from './pages/products/Products.jsx'     
+import AdminPage from './pages/AdminPage/AdminPage.jsx'
+import LoginUser from './pages/LoginUser/LoginUser.jsx'
+import RegUser from './pages/RegUser/RegUser.jsx'    
 
 
 function App() {
 
   return (
-       <Router>
+      <Router>
       <Navbar />
       <Routes>
         {/* <Route path="/" element={<Home />} /> */}
-        <Route path="/about" element={<About />} />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/login" element={<LoginUser />} />
+        <Route path="/register" element={<RegUser />} />
         {/* <Route path="/products" element={<Products />} /> */}
       </Routes>
       <Footer />
