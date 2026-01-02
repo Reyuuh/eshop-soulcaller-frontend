@@ -6,67 +6,27 @@ import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import './App.css'
-import LayoutPage from "./pages/LayoutPage/LayoutPage";
-import Modal from "./components/Modal/Modal";
-import { useDispatch } from "react-redux";
-import { jwtDecode } from "jwt-decode";
-import { loginUser, logoutUser } from "./redux/slices/userSlice";
+import Navbar from './components/Navbar/Navbar.jsx'
+import Footer from './components/Footer/Footer.jsx' 
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import About from './pages/about/About.jsx'
+// import Home from './pages/home/Home.jsx'
+// import Products from './pages/products/Products.jsx'     
 
-const App = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const location = useLocation();
-  const token = localStorage.getItem('token');
 
-  useEffect(() => {
-    if (token) {
-      const decodedToken = jwtDecode(token);
-      const { email, username, role } = decodedToken;
-      dispatch(loginUser({ email, username, role, token }));
-    }
-    if (!token) {
-      dispatch(logoutUser());
-      navigate("/");
-    }
-    window.addEventListener('beforeunload', () => {
-      localStorage.removeItem('token');
-    });
-  }, [dispatch, navigate, token]);
-
-  // Dynamiskt lägga till eller ta bort klassen för bakgrundsbild
-  useEffect(() => {
-    if (location.pathname === "/") {
-      document.body.classList.add("hero-background");
-    } else {
-      document.body.classList.remove("hero-background");
-    }
-    if (location.pathname === "/auth") {
-      document.body.classList.add("hero-auth-background");
-    } else {
-      document.body.classList.remove("hero-auth-background");
-    }
-  }, [location.pathname]);
+function App() {
 
   return (
-    <div className="App">
+       <Router>
+      <Navbar />
       <Routes>
-        <Route element={<LayoutPage />}>
-          {/* Offentliga sidor */}
-          <Route path="/" element={<WelcomePage />} />
-          <Route path="/auth" element={<AuthPage />} />
-
-          {/* Skyddade routes */}
-          <Route
-            path="/dashboard"
-            element={<ProtectedRoute element={<DashboardPage />} />}
-          />
-        </Route>
-        {/* 404-sida */}
-        <Route path="*" element={<NotFoundPage />} />
+        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/about" element={<About />} />
+        {/* <Route path="/products" element={<Products />} /> */}
       </Routes>
-      <Modal />
-    </div>
-  );
-};
+      <Footer />
+    </Router>
+  )
+}
 
 export default App;
