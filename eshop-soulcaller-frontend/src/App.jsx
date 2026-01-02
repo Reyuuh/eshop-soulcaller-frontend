@@ -1,14 +1,23 @@
-import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar.jsx";
-import Footer from "./components/Footer/Footer.jsx";
-import About from "./pages/about/About.jsx";
+import { useState } from 'react'
+import './App.css'
+import Navbar from './components/Navbar/Navbar.jsx'
+import Footer from './components/Footer/Footer.jsx' 
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import AdminPage from './pages/AdminPage/AdminPage.jsx'
+import LoginUser from './pages/LoginUser/LoginUser.jsx'
+import RegUser from './pages/RegUser/RegUser.jsx'    
+
 
 function App() {
   return (
-    <>
+      <Router>
       <Navbar />
       <Routes>
-        <Route path="/about" element={<About />} />
+        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/login" element={<LoginUser />} />
+        <Route path="/register" element={<RegUser />} />
+        {/* <Route path="/products" element={<Products />} /> */}
       </Routes>
       <Footer />
     </>
