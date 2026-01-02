@@ -5,6 +5,7 @@ const LoginForm = () => {
   return (
     <div className="login-form-container">
         <form action="submit" id='login-form'>
+            <h2>Login</h2>
             <label htmlFor="username">Username:</label>
             <input type="text" id="username" name="username" required />
             <br />
