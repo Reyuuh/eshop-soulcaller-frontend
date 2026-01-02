@@ -1,0 +1,18 @@
+.login-form-container {
+    padding: 20px;
+    background-color: #3e3e3e;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    #login-form{
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        // margin: 0 auto;
+        input{
+            padding: 3px;
+            border-radius: 5px;
+        }
+    }
+}
