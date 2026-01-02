@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ShoppingCart from '../ShoppingCart'; // Add this import
+import ShoppingCart from '../ShoppingCart/ShoppingCart'; // Add this import
 import './Navbar.scss';
 
 export default function Navbar() {
