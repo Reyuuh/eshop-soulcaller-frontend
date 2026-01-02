@@ -6,10 +6,14 @@ const Regform = () => {
     <div className="regform-container">
       <form id='reg-form'>
       <h2>Register User</h2>
-        <input type="text" placeholder="Username" />
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Password" />
-        <input type="password" placeholder="Confirm Password" />
+        <label htmlFor="username">Username:</label>
+        <input type="text" id="username" placeholder="Username" />
+        <label htmlFor="email">Email:</label>
+        <input type="email" id="email" placeholder="Email" />
+        <label htmlFor="password">Password:</label>
+        <input type="password" id="password" placeholder="Password" />
+        <label htmlFor="confirm-password">Confirm Password:</label>
+        <input type="password" id="confirm-password" placeholder="Confirm Password" />
         <button type="submit">Register</button>
       </form>
     </div>
