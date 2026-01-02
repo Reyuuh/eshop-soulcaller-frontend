@@ -20,6 +20,21 @@ $muted: #9ca3af;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    
+    h4 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: $accent;
+    }
   }
 
   &__logo {
@@ -28,6 +43,85 @@ $muted: #9ca3af;
     letter-spacing: 0.4px;
     text-decoration: none;
     font-size: 1.1rem;
+  }
+
+  &__description {
+    color: $muted;
+    font-size: 0.9rem;
+    max-width: 300px;
+    line-height: 1.4;
+  }
+
+  &__nav {
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 1.5rem;
+      
+      li {
+        a {
+          color: $muted;
+          text-decoration: none;
+          font-size: 0.9rem;
+          transition: color 0.2s ease;
+          
+          &:hover {
+            color: $accent;
+          }
+        }
+      }
+    }
+  }
+
+  &__social {
+    display: flex;
+    gap: 1rem;
+    
+    a {
+      color: $muted;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s ease;
+      
+      &:hover {
+        color: $accent;
+      }
+    }
+  }
+
+  &__bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 1rem;
+    padding-top: 1rem;
+    
+    .footer__container {
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    p {
+      margin: 0;
+      color: $muted;
+      font-size: 0.8rem;
+    }
+  }
+
+  &__legal {
+    display: flex;
+    gap: 1rem;
+    
+    a {
+      color: $muted;
+      text-decoration: none;
+      font-size: 0.8rem;
+      transition: color 0.2s ease;
+      
+      &:hover {
+        color: $accent;
+      }
+    }
   }
 
   &__toggle {
@@ -71,6 +165,19 @@ $muted: #9ca3af;
     }
 
     &__toggle { display: inline-flex; }
+    
+    &__container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    &__bottom {
+      .footer__container {
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+      }
+    }
   }
 }
 
