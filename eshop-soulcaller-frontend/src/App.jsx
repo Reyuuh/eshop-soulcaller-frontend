@@ -7,6 +7,7 @@ import AdminPage from './pages/AdminPage/AdminPage.jsx'
 import LoginUser from './pages/LoginUser/LoginUser.jsx'
 import RegUser from './pages/RegUser/RegUser.jsx'    
 import PaymentPage from './pages/PaymentPage/PaymentPage.jsx'
+import ThankYouForYourPurchase from './pages/ThankYouForYourPurchasePage/ThankYouForYourPurchase.jsx'
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/login" element={<LoginUser />} />
         <Route path="/register" element={<RegUser />} /> 
         <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/thankyou" element={<ThankYouForYourPurchase />} />
       </Routes>
       <Footer />
     </Router>

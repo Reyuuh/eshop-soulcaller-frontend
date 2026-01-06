@@ -10,6 +10,8 @@ const PaymentForm = () => {
             <input type="text" id="name" placeholder="Name on Card" required />
             <label htmlFor="email">Email:</label>
             <input type="email" id="email" placeholder="Email" required />
+            <label htmlFor="adress">Address:</label>
+            <input type="text" id="adress" placeholder="Address" required />
             <label htmlFor="expiry-date">Expiry Date:</label>
             <input type="text" id="expiry-date" placeholder="MM/YY" required />   
             <label htmlFor="cvv">CVV:</label>
