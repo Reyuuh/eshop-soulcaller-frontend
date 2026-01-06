@@ -8,6 +8,8 @@ import LoginUser from './pages/LoginUser/LoginUser.jsx'
 import RegUser from './pages/RegUser/RegUser.jsx'    
 import PaymentPage from './pages/PaymentPage/PaymentPage.jsx'
 import ThankYouForYourPurchase from './pages/ThankYouForYourPurchasePage/ThankYouForYourPurchase.jsx'
+import HomePage from './pages/HomePage/HomePage.jsx'
+import ProductPage from './pages/ProductPage/ProductPage.jsx'
 
 
 function App() {
@@ -16,7 +18,8 @@ function App() {
       <Router>
       <Navbar />
       <Routes>
-        {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/" element={<HomePage />} />
+        <Route path="/products" element={<ProductPage />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/login" element={<LoginUser />} />
         <Route path="/register" element={<RegUser />} /> 
