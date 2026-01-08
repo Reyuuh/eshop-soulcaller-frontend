@@ -14,7 +14,6 @@ import SingleProductPage from './pages/SingleProductPage/SingleProductPage.jsx'
 
 
 function App() {
-
   return (
       <Router>
       <Navbar />
@@ -29,8 +28,8 @@ function App() {
         <Route path="/thankyou" element={<ThankYouForYourPurchase />} />
       </Routes>
       <Footer />
-    </Router>
-  )
+    </>
+  );
 }
 
-export default App
+export default App;

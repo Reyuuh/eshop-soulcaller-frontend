@@ -4,3 +4,17 @@
   box-sizing: border-box;
   font-family: 'Arial', sans-serif;
 }
+
+.hero-background {
+  background-image: url('/path/to/hero-image.jpg'); /* Replace with actual image path */
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
+.hero-auth-background {
+  background-image: url('/path/to/auth-image.jpg'); /* Replace with actual image path */
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
