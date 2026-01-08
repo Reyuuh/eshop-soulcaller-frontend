@@ -10,6 +10,7 @@ import PaymentPage from './pages/PaymentPage/PaymentPage.jsx'
 import ThankYouForYourPurchase from './pages/ThankYouForYourPurchasePage/ThankYouForYourPurchase.jsx'
 import HomePage from './pages/HomePage/HomePage.jsx'
 import ProductPage from './pages/ProductPage/ProductPage.jsx'
+import SingleProductPage from './pages/SingleProductPage/SingleProductPage.jsx'
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<ProductPage />} />
+        <Route path="/product" element={<SingleProductPage />} /> // KOM IHÅH! Kommer byta ut till product/:id vid ett senare tillfälle, när vi har produkter med id i vår backend
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/login" element={<LoginUser />} />
         <Route path="/register" element={<RegUser />} /> 
