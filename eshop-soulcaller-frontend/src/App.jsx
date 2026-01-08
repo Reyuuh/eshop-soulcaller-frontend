@@ -25,7 +25,8 @@ function App() {
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/login" element={<LoginUser />} />
         <Route path="/register" element={<RegUser />} />
-        {/* <Route path="/products" element={<Products />} /> */}
+        <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/thankyou" element={<ThankYouForYourPurchase />} />
       </Routes>
 
       <Footer />
