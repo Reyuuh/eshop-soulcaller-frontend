@@ -15,7 +15,7 @@ import SingleProductPage from './pages/SingleProductPage/SingleProductPage.jsx'
 
 function App() {
   return (
-      <Router>
+    <>
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
