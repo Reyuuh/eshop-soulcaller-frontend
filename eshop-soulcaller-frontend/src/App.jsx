@@ -20,10 +20,10 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<ProductPage />} />
-        <Route path="/product" element={<SingleProductPage />} /> // KOM IHÅH! Kommer byta ut till product/:id vid ett senare tillfälle, när vi har produkter med id i vår backend
+        <Route path="/product" element={<SingleProductPage />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/login" element={<LoginUser />} />
-        <Route path="/register" element={<RegUser />} /> 
+        <Route path="/register" element={<RegUser />} />
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/thankyou" element={<ThankYouForYourPurchase />} />
       </Routes>
