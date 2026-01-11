@@ -3,10 +3,9 @@ import LoginForm from '../../components/LoginForm/LoginForm'
 
 const LoginUser = () => {
   return (
-    <div>
-        <LoginForm />
-    </div>
-  )
+<>
+    <LoginForm />
+</>  )
 }
 
 export default LoginUser

@@ -3,11 +3,12 @@ import AdminAddProductForm from '../../components/AdminAddProductForm/AdminAddPr
 
 const AdminPage = () => {
   return (
-    <div>
+    <>
+    <section>
         <h1>Admin Page</h1>
-
+    </section>
         <AdminAddProductForm />
-    </div>
+    </>
   )
 }
 
