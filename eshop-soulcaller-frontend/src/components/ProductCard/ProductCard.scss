@@ -17,9 +17,14 @@
         flex-direction: column;
         align-items: center;
         text-align: center;
-        width: 250px;
+        width: 280px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        .product-link {
+        text-decoration: none;
+        color: inherit;
+}
 
         &:hover {
             transform: translateY(-5px);
@@ -27,8 +32,8 @@
         }
 
         .product-image {
-            width: 100%;
-            height: auto;
+            width: 225px;
+            height: 240px;
             border-radius: 5px;
             margin-bottom: 10px;
         }
@@ -62,6 +67,67 @@
     }
 }
 
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+
+    .pagination-btn {
+        padding: 10px 15px;
+        background-color: #7c3aed;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-weight: 500;
+
+        &:hover:not(:disabled) {
+            background-color: #6d28d9;
+        }
+
+        &:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+    }
+
+    .pagination-numbers {
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        .pagination-number {
+            padding: 8px 12px;
+            background-color: #f0f0f0;
+            color: #333;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: 500;
+
+            &:hover {
+                background-color: #7c3aed;
+                color: white;
+                border-color: #7c3aed;
+            }
+
+            &.active {
+                background-color: #7c3aed;
+                color: white;
+                border-color: #7c3aed;
+            }
+        }
+    }
+}
+
 @media (max-width: 768px) {
     .product-card-container {
         padding: 10px;
@@ -70,6 +136,15 @@
         .product-card {
             width: 100%;
             max-width: 300px;
+        }
+    }
+
+    .pagination {
+        flex-direction: column;
+        gap: 15px;
+
+        .pagination-numbers {
+            max-width: 100%;
         }
     }
 }

@@ -29,3 +29,30 @@ export const loginUser = async (credentials) => {
     }
     return await response.json()
 }
+
+export const getProducts = async () => {
+    const response = await fetch(`${API_URL}products/`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    if(!response.ok){
+        throw new Error('Failed to fetch products')
+    }
+    return await response.json()
+}
+
+export const getProductById = async (id) => {
+    if (!id) throw new Error('Product id is required')
+    const response = await fetch(`${API_URL}products/${id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    if(!response.ok){
+        throw new Error('Failed to fetch product')
+    }
+    return await response.json()
+}
