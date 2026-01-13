@@ -197,7 +197,7 @@ export async function deleteCategory(id) {
       const data = await res.json();
       if (data?.message) msg += `: ${data.message}`;
     } catch {
-      
+        // ignore JSON parse error
     }
 
     throw new Error(msg);
@@ -252,8 +252,8 @@ export async function deleteOrder(id) {
       const data = await res.json();
       if (data?.message) msg += `: ${data.message}`;
     } catch {
-
-    }
+      // ignore JSON parse error
+    }   
 
     throw new Error(msg);
   }

@@ -5,6 +5,7 @@ import {
   updateCategory,
   deleteCategory,
 } from "../../services/api";
+import './AdminCategoriesTab.scss';
 
 
 const AdminCategoriesTab = () => {
@@ -133,8 +134,8 @@ return (
       {error && <div>{error}</div>}
       {message && <div>{message}</div>}
 
-      <section>
-        <form onSubmit={handleSubmit}>
+      <section className="admin-category-form-container">
+        <form onSubmit={handleSubmit} id="admin-category-form">
           <div>
             <label>
               Namn*:
