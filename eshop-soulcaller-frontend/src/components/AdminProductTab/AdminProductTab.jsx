@@ -1,7 +1,8 @@
 // src/components/admin/AdminProductsTab.jsx
 import { useEffect, useState } from "react";
 import {
-  fetchProducts,
+  getProducts,
+  getProductById,
   createProduct,
   updateProduct,
   deleteProduct,
@@ -36,7 +37,7 @@ const AdminProductsTab = () => {
     try {
       setLoading(true);
       setError("");
-      const data = await fetchProducts();
+      const data = await getProducts();
       setProducts(data);
     } catch (err) {
       console.error(err);

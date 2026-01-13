@@ -1,25 +1,84 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+const API_URL = 'http://localhost:8080/';
+
+//USERS
+
+export const registerUser = async (userData) => {
+    const response = await fetch(`${API_URL}users/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData)
+    })
+    if(!response.ok){
+        throw new Error('Failed to register user')
+    }
+    return await response.json()
+}
+
+export const loginUser = async (credentials) => {
+    const response = await fetch(`${API_URL}users/login/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(credentials)
+    })
+    if(!response.ok){
+        const errorData = await response.json()
+        console.error('Login error response:', errorData)
+        throw new Error(errorData.message || 'Failed to login')
+    }
+    return await response.json()
+}
 
 // PRODUKTER
 
-export async function fetchProducts() {
-  const res = await fetch(`${API_URL}/products`);
-  if (!res.ok) {
-    throw new Error('Kunde inte hämta produkter');
-  }
-  return res.json();
+export const getProducts = async () => {
+    const response = await fetch(`${API_URL}products/`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    if(!response.ok){
+        throw new Error('Failed to fetch products')
+    }
+    return await response.json()
 }
 
-export async function fetchProductById(id) {
-  const res = await fetch(`${API_URL}/products/${id}`);
-    if (!res.ok) {
-    throw new Error('Kunde inte hämta produkten');
-  } 
-    return res.json();
+export const getProductById = async (id) => {
+    if (!id) throw new Error('Product id is required')
+    const response = await fetch(`${API_URL}products/${id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    if(!response.ok){
+        throw new Error('Failed to fetch product')
+    }
+    return await response.json()
 }
+
+// export async function fetchProducts() {
+//   const res = await fetch(`${API_URL}/products`);
+//   if (!res.ok) {
+//     throw new Error('Kunde inte hämta produkter');
+//   }
+//   return res.json();
+// }
+
+// export async function fetchProductById(id) {
+//   const res = await fetch(`${API_URL}/products/${id}`);
+//     if (!res.ok) {
+//     throw new Error('Kunde inte hämta produkten');
+//   } 
+//     return res.json();
+// }
 
 export async function createProduct(product) {
-  const res = await fetch(`${API_URL}/products`, {
+  const res = await fetch(`${API_URL}products`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -37,7 +96,7 @@ export async function createProduct(product) {
 }
 
 export async function updateProduct(id, productData) {
-  const res = await fetch(`${API_URL}/products/${id}`, {
+  const res = await fetch(`${API_URL}products/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -52,7 +111,7 @@ export async function updateProduct(id, productData) {
 }
 
 export async function deleteProduct(id) {
-  const res = await fetch(`${API_URL}/products/${id}`, {
+  const res = await fetch(`${API_URL}products/${id}`, {
     method: 'DELETE',
   });
 
@@ -83,7 +142,7 @@ export async function deleteProduct(id) {
 
 // KATEGORIER
 export async function fetchCategories() {
-  const res = await fetch(`${API_URL}/categories`);
+  const res = await fetch(`${API_URL}categories`);
   if (!res.ok) {
     throw new Error('Kunde inte hämta kategorier');
   }
@@ -91,7 +150,7 @@ export async function fetchCategories() {
 }
 
 export async function fetchCategoryById(id) {
-  const res = await fetch(`${API_URL}/categories/${id}`);
+  const res = await fetch(`${API_URL}categories/${id}`);
     if (!res.ok) {
     throw new Error('Kunde inte hämta kategorin');
   }
@@ -99,7 +158,7 @@ export async function fetchCategoryById(id) {
 }
 
 export async function createCategory(category) {
-  const res = await fetch(`${API_URL}/categories`, {
+  const res = await fetch(`${API_URL}categories`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -113,7 +172,7 @@ export async function createCategory(category) {
 }
 
 export async function updateCategory(id, categoryData) {
-  const res = await fetch(`${API_URL}/categories/${id}`, {
+  const res = await fetch(`${API_URL}categories/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -127,7 +186,7 @@ export async function updateCategory(id, categoryData) {
 }
 
 export async function deleteCategory(id) {
-  const res = await fetch(`${API_URL}/categories/${id}`, {
+  const res = await fetch(`${API_URL}categories/${id}`, {
     method: "DELETE",
   });
 
@@ -150,7 +209,7 @@ export async function deleteCategory(id) {
 
 //Orders
 export async function fetchOrders() {
-  const res = await fetch(`${API_URL}/orders`);
+  const res = await fetch(`${API_URL}orders`);
   if (!res.ok) {
     throw new Error('Kunde inte hämta orders');
   }
@@ -158,7 +217,7 @@ export async function fetchOrders() {
 }
 
 export async function fetchOrderById(id) {
-  const res = await fetch(`${API_URL}/orders/${id}`);
+  const res = await fetch(`${API_URL}orders/${id}`);
     if (!res.ok) {
     throw new Error('Kunde inte hämta ordern');
   }
@@ -166,7 +225,7 @@ export async function fetchOrderById(id) {
 }
 
 export async function updateOrder(id, orderData) {
-  const res = await fetch(`${API_URL}/orders/${id}`, {
+  const res = await fetch(`${API_URL}orders/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -182,7 +241,7 @@ export async function updateOrder(id, orderData) {
 }
 
 export async function deleteOrder(id) {
-  const res = await fetch(`${API_URL}/orders/${id}`, {
+  const res = await fetch(`${API_URL}orders/${id}`, {
     method: "DELETE",
   });
 
@@ -219,29 +278,3 @@ async function fetchJSON(path, options = {}) {
   return res.json();
 }
 
-export const getProducts = async () => {
-    const response = await fetch(`${API_URL}products/`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
-    if(!response.ok){
-        throw new Error('Failed to fetch products')
-    }
-    return await response.json()
-}
-
-export const getProductById = async (id) => {
-    if (!id) throw new Error('Product id is required')
-    const response = await fetch(`${API_URL}products/${id}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
-    if(!response.ok){
-        throw new Error('Failed to fetch product')
-    }
-    return await response.json()
-}
