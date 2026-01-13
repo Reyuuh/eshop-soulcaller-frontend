@@ -197,7 +197,7 @@ export async function deleteCategory(id) {
       const data = await res.json();
       if (data?.message) msg += `: ${data.message}`;
     } catch {
-      
+        // ignore JSON parse error
     }
 
     throw new Error(msg);
@@ -252,8 +252,8 @@ export async function deleteOrder(id) {
       const data = await res.json();
       if (data?.message) msg += `: ${data.message}`;
     } catch {
-
-    }
+      // ignore JSON parse error
+    }   
 
     throw new Error(msg);
   }
@@ -261,20 +261,38 @@ export async function deleteOrder(id) {
   return { success: true };
 }
 
+export const createPaymentIntent = async (amount, orderId) => {
+    const response = await fetch(`${API_URL}payments/create-intent/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount, orderId })
+    });
+    if (!response.ok) throw new Error('Failed to create payment intent');
+    return await response.json();
+};
 
+export const processPayment = async (paymentData) => {
+    const response = await fetch(`${API_URL}payments/process/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(paymentData)
+    });
+    if (!response.ok) throw new Error('Payment processing failed');
+    return await response.json();
+};
 
 //hjälpmedel
 
-async function fetchJSON(path, options = {}) {
-  const res = await fetch(`${API_URL}${path}`, {
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    ...options,
-  });
+// async function fetchJSON(path, options = {}) {
+//   const res = await fetch(`${API_URL}${path}`, {
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     ...options,
+//   });
 
-  if (!res.ok) throw new Error(`API error: ${res.status}`);
+//   if (!res.ok) throw new Error(`API error: ${res.status}`);
 
-  return res.json();
-}
+//   return res.json();
+// }
 

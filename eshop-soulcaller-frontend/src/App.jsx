@@ -1,5 +1,7 @@
 // import { useState } from 'react'
 import './App.css'
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 import Navbar from './components/Navbar/Navbar.jsx'
 import Footer from './components/Footer/Footer.jsx' 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -12,12 +14,15 @@ import HomePage from './pages/HomePage/HomePage.jsx'
 import ProductPage from './pages/ProductPage/ProductPage.jsx'
 import SingleProductPage from './pages/SingleProductPage/SingleProductPage.jsx'
 
+const stripePromise = loadStripe("YOUR_PUBLISHABLE_KEY"); // Get from Stripe Dashboard
+
 
 function App() {
   return (
     <>
       <Navbar />
 
+      <Elements stripe={stripePromise}>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<ProductPage />} />
@@ -28,7 +33,7 @@ function App() {
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/thankyou" element={<ThankYouForYourPurchase />} />
       </Routes>
-
+    </Elements>
       <Footer />
     </>
   );
