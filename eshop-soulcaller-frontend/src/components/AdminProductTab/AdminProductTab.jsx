@@ -5,10 +5,13 @@ import {
   createProduct,
   updateProduct,
   deleteProduct,
+  fetchCategories,
 } from "../../services/api";
 
-export default function AdminProductsTab() {
+const AdminProductsTab = () => {
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+
   const [form, setForm] = useState({
     id: null,
     name: "",
@@ -17,14 +20,16 @@ export default function AdminProductsTab() {
     img_url: "",
     category_id: "",
   });
+
   const [isEditing, setIsEditing] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);   // för produkter
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
   useEffect(() => {
     loadProducts();
+    loadCategories();
   }, []);
 
   async function loadProducts() {
@@ -38,6 +43,16 @@ export default function AdminProductsTab() {
       setError("Kunde inte hämta produkter.");
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function loadCategories() {
+    try {
+      const data = await fetchCategories();
+      setCategories(data);
+    } catch (err) {
+      console.error(err);
+      // vi sätter inte error här för att inte döda hela produktsidan
     }
   }
 
@@ -84,12 +99,14 @@ export default function AdminProductsTab() {
       }
 
       if (isEditing && form.id != null) {
+        // UPDATE
         const updated = await updateProduct(form.id, payload);
         setProducts(prev =>
           prev.map(p => (p.id === updated.id ? updated : p))
         );
         setMessage(`Produkten "${updated.name}" uppdaterades.`);
       } else {
+        // CREATE
         const created = await createProduct(payload);
         setProducts(prev => [...prev, created]);
         setMessage(`Produkten "${created.name}" skapades.`);
@@ -137,6 +154,13 @@ export default function AdminProductsTab() {
       console.error(err);
       setError("Kunde inte ta bort produkten.");
     }
+  }
+
+  // Hjälp-funktion för att visa kategorinamnet i tabellen
+  function getCategoryName(categoryId) {
+    if (categoryId == null) return "-";
+    const cat = categories.find(c => c.id === categoryId);
+    return cat ? cat.name : categoryId;
   }
 
   return (
@@ -199,13 +223,19 @@ export default function AdminProductsTab() {
 
           <div>
             <label>
-              Kategori-ID:
-              <input
-                type="number"
+              Kategori:
+              <select
                 name="category_id"
                 value={form.category_id}
                 onChange={handleChange}
-              />
+              >
+                <option value="">Ingen kategori</option>
+                {categories.map(cat => (
+                  <option key={cat.id} value={cat.id}>
+                    {cat.name}
+                  </option>
+                ))}
+              </select>
             </label>
           </div>
 
@@ -257,7 +287,7 @@ export default function AdminProductsTab() {
                     <td>{product.id}</td>
                     <td>{product.name}</td>
                     <td>{product.price ?? "-"}</td>
-                    <td>{product.category_id ?? "-"}</td>
+                    <td>{getCategoryName(product.category_id)}</td>
                     <td>
                       <button onClick={() => handleEdit(product)}>
                         Redigera
@@ -274,5 +304,6 @@ export default function AdminProductsTab() {
       </section>
     </div>
   );
-}
+};
 
+export default AdminProductsTab;

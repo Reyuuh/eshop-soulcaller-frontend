@@ -1,5 +1,6 @@
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
 
+// PRODUKTER
 
 export async function fetchProducts() {
   const res = await fetch(`${API_URL}/products`);
@@ -138,6 +139,61 @@ export async function deleteCategory(id) {
       if (data?.message) msg += `: ${data.message}`;
     } catch {
       
+    }
+
+    throw new Error(msg);
+  }
+
+  return { success: true };
+}
+
+
+//Orders
+export async function fetchOrders() {
+  const res = await fetch(`${API_URL}/orders`);
+  if (!res.ok) {
+    throw new Error('Kunde inte hämta orders');
+  }
+  return res.json();
+}
+
+export async function fetchOrderById(id) {
+  const res = await fetch(`${API_URL}/orders/${id}`);
+    if (!res.ok) {
+    throw new Error('Kunde inte hämta ordern');
+  }
+    return res.json();
+}
+
+export async function updateOrder(id, orderData) {
+  const res = await fetch(`${API_URL}/orders/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(orderData),
+  });
+
+  if (!res.ok) {
+    throw new Error('Kunde inte uppdatera ordern');
+  }
+
+  return res.json();
+}
+
+export async function deleteOrder(id) {
+  const res = await fetch(`${API_URL}/orders/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!res.ok && res.status !== 204) {
+    let msg = `Kunde inte ta bort ordern (status ${res.status})`;
+
+    try {
+      const data = await res.json();
+      if (data?.message) msg += `: ${data.message}`;
+    } catch {
+
     }
 
     throw new Error(msg);
