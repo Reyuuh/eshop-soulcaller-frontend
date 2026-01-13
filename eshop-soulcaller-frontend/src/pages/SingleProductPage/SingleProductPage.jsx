@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import './SingleProductPage.scss'
 import { getProductById } from '../../services/api'
+import { useCart } from '../../context/CartContext'
 
 
 const SingleProductPage = () => {
@@ -9,6 +10,8 @@ const SingleProductPage = () => {
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+    const [quantity, setQuantity] = useState(1)
+  const { addToCart } = useCart()
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -28,6 +31,24 @@ const SingleProductPage = () => {
     if (id) fetchProduct()
   }, [id])
 
+    const handleAddToCart = () => {
+    if (product) {
+      addToCart({
+        ...product,
+        quantity: quantity
+      })
+      setQuantity(1) // Reset quantity after adding
+      alert('Product added to cart!')
+    }
+  }
+
+    const handleQuantityChange = (value) => {
+    const newQuantity = parseInt(value)
+    if (newQuantity > 0) {
+      setQuantity(newQuantity)
+    }
+  }
+
   if (loading) return <div className="single-product-page"><p>Loading product...</p></div>
   if (error) return <div className="single-product-page"><p className="error-message">{error}</p></div>
   if (!product) return <div className="single-product-page"><p>Product not found</p></div>
@@ -44,7 +65,17 @@ const SingleProductPage = () => {
           <h1 className="product-title">{product.name}</h1>
           <p className="product-price">${product.price}</p>
           {product.description && <p className="product-description">{product.description}</p>}
-          <button className="add-to-cart-btn">Add to Cart</button>
+           <div className="quantity-section">
+            <label htmlFor="quantity">Quantity:</label>
+            <input 
+              type="number" 
+              id="quantity"
+              min="1" 
+              value={quantity} 
+              onChange={(e) => handleQuantityChange(e.target.value)}
+            />
+          </div>
+          <button className="add-to-cart-btn" onClick={handleAddToCart}>Add to Cart</button>
           <div className="back-link">
             <Link to="/">← Back to shop</Link>
           </div>

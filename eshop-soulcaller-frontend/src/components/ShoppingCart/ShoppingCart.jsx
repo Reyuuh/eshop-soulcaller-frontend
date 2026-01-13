@@ -1,37 +1,32 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { removeItem, updateQuantity, clearCart } from '../../redux/slices/cartSlice';
+import { useCart } from '../../context/CartContext';
 import './ShoppingCart.scss';
+import {Link } from 'react-router-dom';
 
 const ShoppingCart = () => {
-  const { items, total } = useSelector((state) => state.cart);
-  const dispatch = useDispatch();
+  const { cartItems, removeFromCart, updateQuantity, clearCart, getTotalPrice } = useCart();
 
   const handleQuantityChange = (id, quantity) => {
-    if (quantity > 0) {
-      dispatch(updateQuantity({ id, quantity }));
-    } else {
-      dispatch(removeItem(id));
-    }
+    updateQuantity(id, quantity);
   };
 
   const handleRemove = (id) => {
-    dispatch(removeItem(id));
+    removeFromCart(id);
   };
 
   const handleClearCart = () => {
-    dispatch(clearCart());
+    clearCart();
   };
 
   return (
     <div className="shopping-cart">
       <h2>Shopping Cart</h2>
-      {items.length === 0 ? (
+      {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
         <>
           <ul className="cart-items">
-            {items.map((item) => (
+            {cartItems.map((item) => (
               <li key={item.id} className="cart-item">
                 <div className="item-details">
                   <h3>{item.name}</h3>
@@ -47,16 +42,12 @@ const ShoppingCart = () => {
             ))}
           </ul>
           <div className="cart-total">
-            <h3>Total: ${total.toFixed(2)}</h3>
+            <h3>Total: ${getTotalPrice().toFixed(2)}</h3>
             <button onClick={handleClearCart} className="clear-btn">Clear Cart</button>
-            <button className="checkout-btn">Checkout</button>
+            <Link to="/payment" className="checkout-btn">Checkout</Link>
           </div>
         </>
       )}
-      {/* Example add item button for testing */}
-      <button onClick={() => dispatch({ type: 'cart/addItem', payload: { id: 1, name: 'Sample Product', price: 10.99 } })}>
-        Add Sample Item
-      </button>
     </div>
   );
 };
