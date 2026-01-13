@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
-import './Navbar.scss'
+import React, { useState } from 'react';
+import ShoppingCart from '../ShoppingCart/ShoppingCart'; // Add this import
+import './Navbar.scss';
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false); // New state for cart toggle
 
   return (
     <header className="navbar">
@@ -27,7 +29,21 @@ export default function Navbar() {
             <li><a href="#contact">Contact</a></li>
           </ul>
         </nav>
+
+        {/* Add cart button and dropdown */}
+        <button
+          className="navbar__cart-toggle"
+          onClick={() => setCartOpen(!cartOpen)}
+          aria-label="Toggle cart"
+        >
+          🛒 Cart
+        </button>
+        {cartOpen && (
+          <div className="navbar__cart-dropdown">
+            <ShoppingCart />
+          </div>
+        )}
       </div>
     </header>
-  )
+  );
 }
