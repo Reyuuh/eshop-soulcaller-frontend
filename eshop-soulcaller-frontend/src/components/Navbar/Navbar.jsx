@@ -1,15 +1,30 @@
-import React, { useState } from 'react';
-import ShoppingCart from '../ShoppingCart/ShoppingCart'; // Add this import
+import React, { useState, useEffect } from 'react';
+import ShoppingCart from '../ShoppingCart/ShoppingCart';
+import { useCart } from '../../context/CartContext';
+import { Link, useLocation } from 'react-router-dom';
 import './Navbar.scss';
+import '../ShoppingCart/ShoppingCart.scss';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [cartOpen, setCartOpen] = useState(false); // New state for cart toggle
+  const [cartOpen, setCartOpen] = useState(false);
+
+  const { getCartItemCount } = useCart();
+  const itemCount = getCartItemCount();
+
+  const location = useLocation();
+
+  // 🔑 If route changes to /payment, auto-close the cart
+  useEffect(() => {
+    if (location.pathname === '/payment') {
+      setCartOpen(false);
+    }
+  }, [location.pathname]);
 
   return (
     <header className="navbar">
       <div className="navbar__container">
-        <a className="navbar__logo" href="/">Soulcaller</a>
+        <Link className="navbar__logo" to="/">Soulcaller</Link>
 
         <button
           className={`navbar__toggle ${open ? 'open' : ''}`}
@@ -23,27 +38,39 @@ export default function Navbar() {
 
         <nav className={`navbar__nav ${open ? 'open' : ''}`}>
           <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/register">Register User</a></li>
-            <li><a href="/admin">Admin</a></li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/login">Login</Link></li>
+            <li><Link to="/register">Register User</Link></li>
+            <li><Link to="/admin">Admin</Link></li>
           </ul>
         </nav>
 
-        {/* Add cart button and dropdown */}
+        {/* Cart button + badge */}
         <button
           className="navbar__cart-toggle"
-          onClick={() => setCartOpen(!cartOpen)}
+          onClick={() => setCartOpen(true)}
           aria-label="Toggle cart"
         >
           🛒 Cart
+          {itemCount > 0 && (
+            <span className="navbar__cart-count">{itemCount}</span>
+          )}
         </button>
-        {cartOpen && (
-          <div className="navbar__cart-dropdown">
-            <ShoppingCart />
-          </div>
-        )}
       </div>
+
+      {/* Side drawer + overlay */}
+      {cartOpen && (
+        <>
+          <div
+            className="shoppingcart-overlay"
+            onClick={() => setCartOpen(false)}
+          />
+          <div className="shoppingcart-panel">
+            {/* 👇 onClose is what Checkout will call */}
+            <ShoppingCart onClose={() => setCartOpen(false)} />
+          </div>
+        </>
+      )}
     </header>
   );
 }

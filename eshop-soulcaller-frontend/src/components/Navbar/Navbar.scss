@@ -1,10 +1,35 @@
-$bg: #102a0f;
-$accent: #255f23;
+$bg: #000000;
+$accent: #e9e9e9;
 $text: #ffffff;
 $muted: #9ca3af;
 
-.navbar {
-  background: $bg;
+.navbar__cart-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.navbar__cart-count {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: $accent;
+  color: #000;
+  padding: 0 6px;
+  min-width: 18px;
+  height: 18px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.navbar { 
+  background: linear-gradient(90deg, #0d1f0d, #3d6d3d, #0d1f0d);
   color: $text;
   position: sticky;
   top: 0;

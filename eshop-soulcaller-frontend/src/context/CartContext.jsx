@@ -8,6 +8,9 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
     const [cartItems, setCartItems] = useState([]);
 
+    // 👇 NEW: controls the slide-in visibility
+    const [isCartOpen, setIsCartOpen] = useState(false);
+
     // Load cart from localStorage on mount
     useEffect(() => {
         const savedCart = localStorage.getItem('cart');
@@ -46,6 +49,9 @@ export const CartProvider = ({ children }) => {
                 return [...prevItems, normalizedProduct];
             }
         });
+
+        // 👇 Optional: automatically open cart when you add something
+        setIsCartOpen(true);
     }, []);
 
     // Remove product from cart
@@ -85,6 +91,13 @@ export const CartProvider = ({ children }) => {
         return cartItems.reduce((count, item) => count + item.quantity, 0);
     }, [cartItems]);
 
+    // 👇 NEW: control functions for the slide-in
+    const openCart = useCallback(() => setIsCartOpen(true), []);
+    const closeCart = useCallback(() => setIsCartOpen(false), []);
+    const toggleCart = useCallback(() => {
+        setIsCartOpen(prev => !prev);
+    }, []);
+
     const value = {
         cartItems,
         addToCart,
@@ -93,6 +106,11 @@ export const CartProvider = ({ children }) => {
         clearCart,
         getTotalPrice,
         getCartItemCount,
+        // 👇 expose these
+        isCartOpen,
+        openCart,
+        closeCart,
+        toggleCart,
     };
 
     return (
