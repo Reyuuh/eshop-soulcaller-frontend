@@ -12,14 +12,6 @@ const Footer = () => {
           </p>
         </div>
         
-        <nav className="footer__nav">
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/register">Register User</a></li>
-            <li><a href="/admin">Admin</a></li>
-          </ul>
-        </nav>
         
         <div className="footer__section">
           <h4>Follow Us</h4>

@@ -4,6 +4,7 @@ import { useCart } from '../../context/CartContext';
 import { Link, useLocation } from 'react-router-dom';
 import './Navbar.scss';
 import '../ShoppingCart/ShoppingCart.scss';
+import logo from '../../assets/brineline-logo-GmS2BPiR.png';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -24,7 +25,9 @@ export default function Navbar() {
   return (
     <header className="navbar">
       <div className="navbar__container">
-        <Link className="navbar__logo" to="/">Soulcaller</Link>
+ <Link className="navbar__logo" to="/">
+  <img src={logo} alt="Logo" />  BRINELINE GAMES SHOP
+</Link>
 
         <button
           className={`navbar__toggle ${open ? 'open' : ''}`}

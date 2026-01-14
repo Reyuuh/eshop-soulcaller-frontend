@@ -1,15 +1,13 @@
-$bg: #102a0f;
-$accent: #255f23;
+// Use the same tokens as the navbar
+$bg: #000000;
+$accent: #e9e9e9;
 $text: #ffffff;
 $muted: #9ca3af;
 
 .footer {
-  background: $bg;
+  // Match navbar vibe: gradient bar in dark space
+  background: linear-gradient(90deg, #000000, #544085, #000000);
   color: $text;
-  // position: sticky;
-  // bottom: 0;
-  // left: 0;
-  // right: 0;
   position: relative;
   width: 100%;
 
@@ -17,12 +15,12 @@ $muted: #9ca3af;
     width: 100%;
     max-width: 100%;
     margin: 0;
-    padding: 1rem 1rem;
+    padding: 1.25rem 1rem; // slightly more vertical padding to mirror navbar
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 1.5rem;
   }
 
   &__section {
@@ -32,8 +30,10 @@ $muted: #9ca3af;
     
     h4 {
       margin: 0;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
       color: $accent;
     }
   }
@@ -41,16 +41,17 @@ $muted: #9ca3af;
   &__logo {
     color: $text;
     font-weight: 700;
-    letter-spacing: 0.4px;
+    letter-spacing: 0.04em;
     text-decoration: none;
     font-size: 1.1rem;
+    text-transform: uppercase;
   }
 
   &__description {
     color: $muted;
     font-size: 0.9rem;
-    max-width: 300px;
-    line-height: 1.4;
+    max-width: 320px;
+    line-height: 1.5;
   }
 
   &__nav {
@@ -59,16 +60,20 @@ $muted: #9ca3af;
       margin: 0;
       padding: 0;
       display: flex;
-      gap: 1.5rem;
+      flex-direction: column;
+      gap: 0.35rem;
       
       li {
         a {
           color: $muted;
           text-decoration: none;
           font-size: 0.9rem;
-          transition: color 0.2s ease;
+          padding: 0.3rem 0.5rem;
+          border-radius: 6px;
+          transition: background 160ms ease, color 160ms ease;
           
           &:hover {
+            background: rgba(255, 255, 255, 0.04); // same as navbar hover
             color: $accent;
           }
         }
@@ -78,48 +83,60 @@ $muted: #9ca3af;
 
   &__social {
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
     
     a {
       color: $muted;
       text-decoration: none;
-      font-weight: 600;
-      transition: color 0.2s ease;
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
       
       &:hover {
+        background: rgba(255, 255, 255, 0.04);
         color: $accent;
+        border-color: rgba(255, 255, 255, 0.08);
       }
     }
   }
 
   &__bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: 1rem;
-    padding-top: 1rem;
-    
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    margin-top: 0.75rem;
+    padding: 0.75rem 1rem 1rem;
+
     .footer__container {
+      padding: 0;
       justify-content: space-between;
+      align-items: center;
       flex-wrap: nowrap;
+      gap: 0.75rem;
     }
 
     p {
       margin: 0;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: $muted;
     }
   }
 
   &__legal {
     display: flex;
-    gap: 1.5rem;
+    gap: 1rem;
     
     a {
       color: $muted;
       text-decoration: none;
-      font-size: 0.85rem;
-      transition: color 0.2s ease;
+      font-size: 0.8rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 6px;
+      transition: background 160ms ease, color 160ms ease;
       
       &:hover {
+        background: rgba(255, 255, 255, 0.04);
         color: $accent;
       }
     }
@@ -130,16 +147,22 @@ $muted: #9ca3af;
   .footer {
     &__container {
       flex-direction: column;
-      gap: 0.5rem;
+      align-items: flex-start;
+      gap: 1rem;
     }
 
     &__bottom {
       .footer__container {
         flex-direction: column;
+        align-items: flex-start;
       }
 
       p {
         order: 1;
+      }
+
+      .footer__legal {
+        order: 2;
       }
     }
   }

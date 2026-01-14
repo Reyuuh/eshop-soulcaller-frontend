@@ -12,7 +12,7 @@
   right: 0;
   height: 100vh;
   width: min(450px, 100%);
-  background: linear-gradient(135deg, #1a1a2e 0%, #3f90e2 100%); /* Cool dark gradient */
+  background: linear-gradient(135deg, #5d5da7 0%, #330c72 100%); /* Cool dark gradient */
   box-shadow: -15px 0 40px rgba(0, 0, 0, 0.8);
   z-index: 100;
   display: flex;
@@ -64,7 +64,7 @@
   justify-content: space-between;
   padding: 1rem;
   margin-bottom: 0.5rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(236, 236, 236, 0.05);
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: background 0.3s ease, transform 0.2s ease;

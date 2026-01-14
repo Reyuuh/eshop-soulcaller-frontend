@@ -28,8 +28,19 @@ $muted: #9ca3af;
 }
 
 
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  img {
+    height: 40px;
+    width: auto;
+  }
+} 
+
 .navbar { 
-  background: linear-gradient(90deg, #0d1f0d, #3d6d3d, #0d1f0d);
+  background: linear-gradient(90deg, #000000, #544085, #000000);
   color: $text;
   position: sticky;
   top: 0;
