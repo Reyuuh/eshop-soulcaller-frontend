@@ -5,6 +5,7 @@ import {
   updateOrder,
   deleteOrder,
 } from "../../services/api";
+import "./AdminOrdersTab.scss";
 
 // 🔹 Status-labels (backendlägen → vad användaren ser)
 const STATUS_LABELS = {
@@ -155,14 +156,13 @@ const AdminOrdersTab = () => {
       {message && <div>{message}</div>}
 
       {/* Formulär för status-uppdatering */}
-      <section>
+      <section className="admin-order-form-container">
+        <form onSubmit={handleSubmit} id="admin-order-form" className="admin-order-form">
         <h3>
           {isEditing
             ? `Redigera order #${form.id}`
             : "Redigera orderstatus"}
         </h3>
-        <form onSubmit={handleSubmit}>
-          <div>
             <label>
               Order-ID:
               <input
@@ -181,9 +181,7 @@ const AdminOrdersTab = () => {
                 disabled={isEditing} // när vi valt via tabellen vill vi låsa ID
               />
             </label>
-          </div>
 
-          <div>
             <label>
               Status:
               <select
@@ -199,7 +197,6 @@ const AdminOrdersTab = () => {
                 ))}
               </select>
             </label>
-          </div>
 
           <div>
             <button type="submit" disabled={saving}>

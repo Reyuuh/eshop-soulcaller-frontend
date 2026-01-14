@@ -53,7 +53,7 @@
 
         .add-to-cart-btn {
             padding: 10px 15px;
-            background-color: #28a745;
+            background-color: #544085;
             color: white;
             border: none;
             border-radius: 5px;
@@ -61,7 +61,7 @@
             transition: background-color 0.3s ease;
 
             &:hover {
-                background-color: #218838;
+                background-color: #544085;
             }
         }
     }
@@ -78,7 +78,7 @@
 
     .pagination-btn {
         padding: 10px 15px;
-        background-color: #255f23;
+        background-color: #544085;
         color: white;
         border: none;
         border-radius: 5px;
@@ -87,7 +87,7 @@
         font-weight: 500;
 
         &:hover:not(:disabled) {
-            background-color: #255f23;
+            background-color: #544085;
         }
 
         &:disabled {
@@ -114,15 +114,26 @@
             font-weight: 500;
 
             &:hover {
-                background-color: #255f23;
+                background-color: #544085;
                 color: white;
-                border-color: #255f23;
+                border-color: #544085;
             }
 
             &.active {
-                background-color: #255f23;
+                background-color: #544085;
                 color: white;
-                border-color: #255f23;
+                border-color: #544085;
+            }
+
+            &.active {
+                background-color: #544085;
+                color: white;
+                border-color: #544085;
+            }
+            &.active {
+                background-color: #544085;
+                color: white;
+                border-color: #544085;
             }
         }
     }
