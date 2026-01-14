@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ShoppingCart from '../ShoppingCart/ShoppingCart';
 import { useCart } from '../../context/CartContext';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Navbar.scss';
 import '../ShoppingCart/ShoppingCart.scss';
 import logo from '../../assets/brineline-logo-GmS2BPiR.png';
@@ -14,20 +14,30 @@ export default function Navbar() {
   const itemCount = getCartItemCount();
 
   const location = useLocation();
+  const navigate = useNavigate();
 
-  // 🔑 If route changes to /payment, auto-close the cart
+  const token = localStorage.getItem('token');
+  const role = localStorage.getItem('role');
+  const isLoggedIn = !!token;
+
   useEffect(() => {
     if (location.pathname === '/payment') {
       setCartOpen(false);
     }
   }, [location.pathname]);
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    navigate('/login');
+  };
+
   return (
     <header className="navbar">
       <div className="navbar__container">
- <Link className="navbar__logo" to="/">
-  <img src={logo} alt="Logo" />  BRINELINE GAMES SHOP
-</Link>
+        <Link className="navbar__logo" to="/">
+          <img src={logo} alt="Logo" /> BRINELINE GAMES SHOP
+        </Link>
 
         <button
           className={`navbar__toggle ${open ? 'open' : ''}`}
@@ -42,13 +52,32 @@ export default function Navbar() {
         <nav className={`navbar__nav ${open ? 'open' : ''}`}>
           <ul>
             <li><Link to="/">Home</Link></li>
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/register">Register User</Link></li>
-            <li><Link to="/admin">Admin</Link></li>
+
+            {!isLoggedIn && (
+              <>
+                <li><Link to="/login">Login</Link></li>
+                <li><Link to="/register">Register User</Link></li>
+              </>
+            )}
+
+            {isLoggedIn && role === 'admin' && (
+              <li><Link to="/admin">Admin</Link></li>
+            )}
+
+            {isLoggedIn && (
+              <li>
+                <button
+                  type="button"
+                  className="navbar__logout-button"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </li>
+            )}
           </ul>
         </nav>
 
-        {/* Cart button + badge */}
         <button
           className="navbar__cart-toggle"
           onClick={() => setCartOpen(true)}
@@ -61,7 +90,6 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Side drawer + overlay */}
       {cartOpen && (
         <>
           <div
@@ -69,7 +97,6 @@ export default function Navbar() {
             onClick={() => setCartOpen(false)}
           />
           <div className="shoppingcart-panel">
-            {/* 👇 onClose is what Checkout will call */}
             <ShoppingCart onClose={() => setCartOpen(false)} />
           </div>
         </>

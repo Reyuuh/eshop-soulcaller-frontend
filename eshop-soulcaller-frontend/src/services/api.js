@@ -3,18 +3,46 @@ const API_URL = 'http://localhost:8080/';
 //USERS
 
 export const registerUser = async (userData) => {
-    const response = await fetch(`${API_URL}users/`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData)
-    })
-    if(!response.ok){
-        throw new Error('Failed to register user')
+  const response = await fetch(`${API_URL}users/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userData),
+  });
+
+  // Läs svaret som text EN gång
+  const text = await response.text().catch(() => "");
+
+  if (!response.ok) {
+    console.error("Register failed:");
+    console.error("Status:", response.status);
+    console.error("Body:", text);
+
+    let message = 'Failed to register user';
+
+    // Om backend skickar JSON med ett "message"-fält, använd det
+    try {
+      const data = JSON.parse(text);
+      if (data?.message) {
+        message = data.message;
+      }
+    } catch (e) {
+      // text var inte JSON, ignorera
     }
-    return await response.json()
-}
+
+    throw new Error(message);
+  }
+
+  // Om allt OK, parsa texten som JSON
+  try {
+    return JSON.parse(text);
+  } catch (e) {
+    console.error("Could not parse JSON from register response:", text);
+    throw new Error("Invalid JSON in register response");
+  }
+};
+
 
 export const loginUser = async (credentials) => {
     const response = await fetch(`${API_URL}users/login/`, {
