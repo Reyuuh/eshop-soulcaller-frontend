@@ -1,0 +1,47 @@
+.checkout-container {
+  display: flex;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+  
+  .order-summary {
+    flex: 1;
+    // background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+
+    .cart-list {
+      list-style: none;
+      padding: 0;
+      
+      .cart-item {
+        padding: 20px;
+        margin-bottom: 10px;
+        background-color: #3e3e3e;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .order-total {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #222;
+    }
+  }
+
+  .payment-section {
+    flex: 1;
+  }
+}
+
+// Responsiv layout för mobiler
+@media (max-width: 768px) {
+  .checkout-container {
+    flex-direction: column;
+  }
+}

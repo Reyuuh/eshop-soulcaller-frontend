@@ -14,10 +14,10 @@ const Footer = () => {
         
         <nav className="footer__nav">
           <ul>
-            <li><a href="/about">About Us</a></li>
-            <li><a href="/contact">Contact</a></li>
-            <li><a href="/shipping">Shipping</a></li>
-            <li><a href="/returns">Returns</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register User</a></li>
+            <li><a href="/admin">Admin</a></li>
           </ul>
         </nav>
         

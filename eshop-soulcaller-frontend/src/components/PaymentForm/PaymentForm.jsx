@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import './PaymentForm.scss';
+import { useCart } from '../../context/CartContext';
 
 const PaymentForm = ({ onPaymentSuccess }) => {
   const stripe = useStripe();
   const elements = useElements();
+  const { clearCart } = useCart();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
@@ -51,12 +53,15 @@ const PaymentForm = ({ onPaymentSuccess }) => {
 
       const result = await response.json();
       if (result.success) {
+        // 4. ✅ HÄR TÖMMER VI KORGEN
+        clearCart();
+      if (result.success) {
         onPaymentSuccess(result);
+        clearCart();
       } else {
         setError(result.message);
       }
-    } catch (err) {
-      setError(err.message);
+    } 
     } finally {
       setLoading(false);
     }

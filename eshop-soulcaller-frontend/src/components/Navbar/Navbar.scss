@@ -1,5 +1,5 @@
-$bg: #0f172a;
-$accent: #7c3aed;
+$bg: #102a0f;
+$accent: #255f23;
 $text: #ffffff;
 $muted: #9ca3af;
 
@@ -38,6 +38,7 @@ $muted: #9ca3af;
     gap: 4px;
     padding: 6px;
     cursor: pointer;
+    display: none;
 
     .bar {
       display: block;

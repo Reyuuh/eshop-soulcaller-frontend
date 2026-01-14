@@ -10,7 +10,8 @@ const SingleProductPage = () => {
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
-    const [quantity, setQuantity] = useState(1)
+  const [quantity, setQuantity] = useState(1)
+  const [showToast, setShowToast] = useState(false);
   const { addToCart } = useCart()
 
   useEffect(() => {
@@ -38,7 +39,9 @@ const SingleProductPage = () => {
         quantity: quantity
       })
       setQuantity(1) // Reset quantity after adding
-      alert('Product added to cart!')
+      setShowToast(true);
+    // Dölj den automatiskt efter 3 sekunder
+    setTimeout(() => setShowToast(false), 3000);
     }
   }
 
@@ -78,6 +81,11 @@ const SingleProductPage = () => {
           <button className="add-to-cart-btn" onClick={handleAddToCart}>Add to Cart</button>
           <div className="back-link">
             <Link to="/">← Back to shop</Link>
+            {showToast && (
+            <div className="toast-notification">
+              ✅ {product.name} har lagts till i varukorgen!
+            </div>
+          )}
           </div>
         </div>
       </div>
