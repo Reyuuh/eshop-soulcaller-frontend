@@ -134,9 +134,8 @@ return (
       {error && <div>{error}</div>}
       {message && <div>{message}</div>}
 
-      <section className="admin-category-form-container">
+      <div className="admin-category-form-container">
         <form onSubmit={handleSubmit} id="admin-category-form">
-          <div>
             <label>
               Namn*:
               <input
@@ -147,9 +146,7 @@ return (
                 required
               />
             </label>
-          </div>
 
-          <div>
             <label>
               Beskrivning:
               <textarea
@@ -159,9 +156,7 @@ return (
                 rows={3}
               />
             </label>
-          </div>
 
-          <div>
             <button type="submit" disabled={saving}>
               {saving
                 ? "Sparar..."
@@ -174,9 +169,8 @@ return (
                 Avbryt redigering
               </button>
             )}
-          </div>
         </form>
-      </section>
+      </div>
 
       <section>
         <div>
