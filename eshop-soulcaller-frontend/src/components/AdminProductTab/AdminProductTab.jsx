@@ -7,6 +7,7 @@ import {
   deleteProduct,
   fetchCategories,
 } from "../../services/api";
+import "./AdminProductTab.scss";
 
 const AdminProductsTab = () => {
   const [products, setProducts] = useState([]);
@@ -170,9 +171,8 @@ const AdminProductsTab = () => {
       {error && <div>{error}</div>}
       {message && <div>{message}</div>}
 
-      <section>
-        <form onSubmit={handleSubmit}>
-          <div>
+      <div className="add-product-form-container">
+        <form onSubmit={handleSubmit} id="add-product-form">
             <label>
               Namn*:
               <input
@@ -183,9 +183,6 @@ const AdminProductsTab = () => {
                 required
               />
             </label>
-          </div>
-
-          <div>
             <label>
               Pris:
               <input
@@ -195,9 +192,6 @@ const AdminProductsTab = () => {
                 onChange={handleChange}
               />
             </label>
-          </div>
-
-          <div>
             <label>
               Beskrivning:
               <textarea
@@ -207,9 +201,7 @@ const AdminProductsTab = () => {
                 rows={3}
               />
             </label>
-          </div>
 
-          <div>
             <label>
               Bild-URL:
               <input
@@ -219,9 +211,7 @@ const AdminProductsTab = () => {
                 onChange={handleChange}
               />
             </label>
-          </div>
 
-          <div>
             <label>
               Kategori:
               <select
@@ -237,9 +227,7 @@ const AdminProductsTab = () => {
                 ))}
               </select>
             </label>
-          </div>
 
-          <div>
             <button type="submit" disabled={saving}>
               {saving
                 ? "Sparar..."
@@ -252,9 +240,8 @@ const AdminProductsTab = () => {
                 Avbryt redigering
               </button>
             )}
-          </div>
         </form>
-      </section>
+      </div>
 
       <section>
         <div>
