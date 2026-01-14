@@ -78,7 +78,7 @@
 
     .pagination-btn {
         padding: 10px 15px;
-        background-color: #7c3aed;
+        background-color: #255f23;
         color: white;
         border: none;
         border-radius: 5px;
@@ -87,7 +87,7 @@
         font-weight: 500;
 
         &:hover:not(:disabled) {
-            background-color: #6d28d9;
+            background-color: #255f23;
         }
 
         &:disabled {
@@ -114,15 +114,15 @@
             font-weight: 500;
 
             &:hover {
-                background-color: #7c3aed;
+                background-color: #255f23;
                 color: white;
-                border-color: #7c3aed;
+                border-color: #255f23;
             }
 
             &.active {
-                background-color: #7c3aed;
+                background-color: #255f23;
                 color: white;
-                border-color: #7c3aed;
+                border-color: #255f23;
             }
         }
     }
