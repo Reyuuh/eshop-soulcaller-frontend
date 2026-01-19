@@ -1,19 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import PaymentForm from "../../components/PaymentForm/PaymentForm.jsx";
-import { useCart } from "../../context/CartContext"; // ⬅️ Importera din hook
-import "./PaymentPage.scss"; // Glöm inte att styla listan
+import { useCart } from "../../context/CartContext";
+import StripeCheckoutButton from "../../components/Checkout/StripeCheckoutButton";
+import "./PaymentPage.scss";
 
 const PaymentPage = () => {
   const navigate = useNavigate();
-  const { cartItems, getTotalPrice } = useCart(); // ⬅️ Hämta data från din korg
+  const { cartItems, getTotalPrice } = useCart();
 
-  const handlePaymentSuccess = (result) => {
-    console.log("Payment success:", result);
-    navigate("/thankyou");
-  };
-
-  // Om korgen är tom kan vi visa ett meddelande istället för formuläret
   if (cartItems.length === 0) {
     return (
       <div className="payment-page">
@@ -26,9 +20,9 @@ const PaymentPage = () => {
   return (
     <div className="payment-page">
       <h1>Checkout</h1>
-      
+
       <div className="checkout-container">
-        {/* VÄNSTER SIDA: Order Summary */}
+        {/* LEFT: Order Summary */}
         <div className="order-summary">
           <h2>Order Summary</h2>
           <ul className="cart-list">
@@ -37,7 +31,7 @@ const PaymentPage = () => {
                 <div className="item-info">
                   <span className="item-name">{item.name}</span>
                   <div>
-                  <img src={item.img_url} alt={item.name} />
+                    <img src={item.img_url} alt={item.name} />
                   </div>
                   <span className="item-quantity">x{item.quantity}</span>
                 </div>
@@ -47,17 +41,18 @@ const PaymentPage = () => {
               </li>
             ))}
           </ul>
-          
+
           <div className="order-total">
             <strong>Total Amount:</strong>
             <strong>{getTotalPrice().toFixed(2)} kr</strong>
           </div>
         </div>
 
-        {/* HÖGER SIDA: Stripe Formulär */}
+        {/* RIGHT: Stripe Checkout Redirect */}
         <div className="payment-section">
-          <h2>Payment Details</h2>
-          <PaymentForm onPaymentSuccess={handlePaymentSuccess} />
+          <h2>Payment</h2>
+          <p>You will be redirected to Stripe to complete your payment.</p>
+          <StripeCheckoutButton />
         </div>
       </div>
     </div>

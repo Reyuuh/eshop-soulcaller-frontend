@@ -1,7 +1,5 @@
-// App.jsx
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { Elements } from "@stripe/react-stripe-js";
 
 import Navbar from "./components/Navbar/Navbar.jsx";
 import Footer from "./components/Footer/Footer.jsx";
@@ -14,14 +12,11 @@ import ThankYouForYourPurchase from "./pages/ThankYouForYourPurchasePage/ThankYo
 import HomePage from "./pages/HomePage/HomePage.jsx";
 import ProductPage from "./pages/ProductPage/ProductPage.jsx";
 import SingleProductPage from "./pages/SingleProductPage/SingleProductPage.jsx";
-
-import getStripe from "./getStripe"; // or "./getstripe" depending on filename
-
-const stripePromise = getStripe();
+import CheckoutSuccess from "./pages/CheckoutSuccess/CheckoutSuccess.jsx";
 
 function App() {
   return (
-    <Elements stripe={stripePromise}>
+    <>
       <Navbar />
 
       <Routes>
@@ -32,11 +27,12 @@ function App() {
         <Route path="/login" element={<LoginUser />} />
         <Route path="/register" element={<RegUser />} />
         <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/checkout/success" element={<CheckoutSuccess />} />
         <Route path="/thankyou" element={<ThankYouForYourPurchase />} />
       </Routes>
 
       <Footer />
-    </Elements>
+    </>
   );
 }
 
