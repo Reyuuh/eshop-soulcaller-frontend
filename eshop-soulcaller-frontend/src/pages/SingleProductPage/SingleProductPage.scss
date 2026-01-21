@@ -16,7 +16,7 @@
     border-radius: 8px;
   }
 
-  .product-title { font-size: 28px; margin-bottom: 8px; }
+  .product-title { font-size: 28px; margin-bottom: 8px; color: #ddd; }
   .product-price { font-size: 22px; color: #7c3aed; margin-bottom: 12px; }
   .product-description { margin-bottom: 16px; color: #ddd; }
   .add-to-cart-btn {
@@ -26,6 +26,9 @@
     border: none;
     border-radius: 6px;
     cursor: pointer;
+  }
+  label{
+  color: #ddd;
   }
   .back-link { margin-top: 16px; a { color: #aaa; text-decoration: none; } }
 

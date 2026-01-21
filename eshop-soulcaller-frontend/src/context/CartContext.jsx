@@ -1,12 +1,25 @@
-/* eslint-disable react-refresh/only-export-components */
-import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import React, { 
+    createContext, 
+    useContext, 
+    useState, 
+    useCallback, 
+    useEffect 
+} from 'react';
 
 // Create the context
 const CartContext = createContext();
 
 // Cart Provider Component
 export const CartProvider = ({ children }) => {
-    const [cartItems, setCartItems] = useState([]);
+    const [cartItems, setCartItems] = useState(() => {
+        try {
+            const savedCart = localStorage.getItem('cart');
+            return savedCart ? JSON.parse(savedCart) : [];
+        } catch (error) {
+            console.error('Failed to parse cart from localStorage:', error);
+            return [];
+        }
+    });
 
     // 👇 NEW: controls the slide-in visibility
     const [isCartOpen, setIsCartOpen] = useState(false);
