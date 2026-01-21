@@ -16,6 +16,7 @@ import ProductPage from "./pages/ProductPage/ProductPage.jsx";
 import SingleProductPage from "./pages/SingleProductPage/SingleProductPage.jsx";
 
 import getStripe from "./getStripe"; // or "./getstripe" depending on filename
+import CategoryPage from "./pages/CategoryPage/CategoryPage.jsx";
 
 const stripePromise = getStripe();
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<ProductPage />} />
         <Route path="/product/:id" element={<SingleProductPage />} />
+        <Route path="/categories/:id" element={<CategoryPage/>} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/login" element={<LoginUser />} />
         <Route path="/register" element={<RegUser />} />

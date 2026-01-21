@@ -3,8 +3,8 @@ import './ProductCard.scss'
 import { getProducts } from '../../services/api'
 import { Link } from 'react-router-dom'
 
-
-const ProductCard = () => {
+// Vi lägger till { data } som en prop här
+const ProductCard = ({ data }) => { 
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -12,30 +12,38 @@ const ProductCard = () => {
   const productsPerPage = 6
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      setLoading(true)
+    // 2. LOGIK: Om 'data' skickas med som prop, använd den istället för att fetcha
+    if (data) {
+      setProducts(data)
+      setLoading(false)
       setError('')
-      try {
-        const data = await getProducts()
-        console.log('Products fetched:', data)
-        setProducts(data)
-      } catch (err) {
-        setError(err.message)
-        console.log('Error, failed to fetch products', err)
-      } finally {
-        setLoading(false)
+    } else {
+      // Om ingen data skickas med (t.ex. på startsidan), hämta allt som vanligt
+      const fetchProducts = async () => {
+        setLoading(true)
+        setError('')
+        try {
+          const fetchedData = await getProducts()
+          setProducts(fetchedData)
+        } catch (err) {
+          setError(err.message)
+        } finally {
+          setLoading(false)
+        }
       }
+      fetchProducts()
     }
+  }, [data]) // 3. VIKTIGT: Kör om useEffect om 'data' ändras
 
-    fetchProducts()
-  }, [])
+  // 4. Nollställ sidnumret till 1 om produktlistan ändras (så man inte fastnar på sista sidan)
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [products.length])
 
-  // Beräkna vilka produkter som ska visas på denna sida
+  // --- Resten av din logik är exakt densamma som tidigare ---
   const indexOfLastProduct = currentPage * productsPerPage
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage
   const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct)
-  
-  // Beräkna totalt antal sidor
   const totalPages = Math.ceil(products.length / productsPerPage)
 
   const handleNextPage = () => {
@@ -57,17 +65,12 @@ const ProductCard = () => {
     window.scrollTo(0, 0)
   }
 
-  if (loading) {
-    return <div className="product-card-container"><p>Loading products...</p></div>
-  }
-
-  if (error) {
-    return <div className="product-card-container"><p className="error-message">{error}</p></div>
-  }
+  if (loading) return <div className="product-card-container"><p>Loading products...</p></div>
+  if (error) return <div className="product-card-container"><p className="error-message">{error}</p></div>
 
   return (
     <>
-        <div className="product-card-container">
+      <div className="product-card-container">
         {currentProducts && currentProducts.length > 0 ? (
           currentProducts.map((product) => {
             const id = product.id || product._id
@@ -76,11 +79,7 @@ const ProductCard = () => {
               <Link to={`/product/${id}`} key={id} className="product-link">
                 <div className="product-card">
                   <h2 className="product-name">{product.name}</h2>
-                  <img
-                    className="product-image"
-                    src={img}
-                    alt={product.name}
-                  />
+                  <img className="product-image" src={img} alt={product.name} />
                   <p className="product-price">${product.price}</p>
                 </div>
               </Link>
@@ -93,14 +92,7 @@ const ProductCard = () => {
 
       {totalPages > 1 && (
         <div className="pagination">
-          <button 
-            className="pagination-btn" 
-            onClick={handlePrevPage} 
-            disabled={currentPage === 1}
-          >
-            Previous
-          </button>
-
+          <button className="pagination-btn" onClick={handlePrevPage} disabled={currentPage === 1}>Previous</button>
           <div className="pagination-numbers">
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
               <button
@@ -112,14 +104,7 @@ const ProductCard = () => {
               </button>
             ))}
           </div>
-
-          <button 
-            className="pagination-btn" 
-            onClick={handleNextPage} 
-            disabled={currentPage === totalPages}
-          >
-            Next
-          </button>
+          <button className="pagination-btn" onClick={handleNextPage} disabled={currentPage === totalPages}>Next</button>
         </div>
       )}
     </>
