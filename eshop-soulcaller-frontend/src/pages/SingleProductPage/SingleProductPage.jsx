@@ -20,6 +20,7 @@ const SingleProductPage = () => {
       setError('')
       try {
         const data = await getProductById(id)
+        console.log(data)
         setProduct(data)
       } catch (err) {
         setError(err.message)
