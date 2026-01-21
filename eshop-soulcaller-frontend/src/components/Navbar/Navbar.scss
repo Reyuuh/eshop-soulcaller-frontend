@@ -9,6 +9,13 @@ $muted: #9ca3af;
   align-items: center;
   gap: 0.35rem;
 }
+.navbar__logout-button {
+  background-color: #000000;
+  border: none;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
 
 .navbar__cart-count {
   position: absolute;

@@ -1,3 +1,11 @@
+.featured-products-title {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 20px 0;
+    color: #f1f1f1;
+    margin-top: 2rem;
+}
 .product-card-container {
     display: flex;
     flex-direction: row;
@@ -140,6 +148,12 @@
 }
 
 @media (max-width: 768px) {
+
+    .featured-products-title {
+        font-size: 2rem;
+        margin: 15px 0;
+    }
+
     .product-card-container {
         padding: 10px;
         gap: 10px;

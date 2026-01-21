@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { addItem } from '../../redux/slices/cartSlice';
 import './HomePage.scss';
 
-const HomePage = () => {
+const FrontPage = () => {
   const dispatch = useDispatch();
 
   // Sample products (replace with API data later)
@@ -24,7 +24,7 @@ const HomePage = () => {
       {products.map((product) => (
         <div key={product.id}>
           <h3>{product.name}</h3>
-          <p>${product.price}</p>
+          <p>{product.price}sek</p>
           <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
         </div>
       ))}
@@ -33,4 +33,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default FrontPage;
