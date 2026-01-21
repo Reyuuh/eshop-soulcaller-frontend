@@ -80,12 +80,6 @@ const ProductCard = ({ data }) => {
                 <div className="product-card">
                   <h2 className="product-name">{product.name}</h2>
                   <img className="product-image" src={img} alt={product.name} />
-                  <p className="product-price">${product.price}</p>
-                  <img
-                    className="product-image"
-                    src={img}
-                    alt={product.name}
-                  />
                   <p className="product-price">{product.price} kr</p>
                 </div>
               </Link>

@@ -69,7 +69,7 @@ const CategoryPage = () => {
               <div className="product-card">
                   <h2 className="product-name">{product.name}</h2>
                   <img className="product-image" src={product.img_url || product.image || 'https://via.placeholder.com/250' } alt={product.name} />
-                  <p className="product-price">${product.price}</p>
+                  <p className="product-price">{product.price} kr</p>
                 </div>
               </div>
             </Link>

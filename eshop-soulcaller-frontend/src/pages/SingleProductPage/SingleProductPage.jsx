@@ -67,7 +67,7 @@ const SingleProductPage = () => {
         </div>
         <div className="info-column">
           <h1 className="product-title">{product.name}</h1>
-          <p className="product-price">${product.price}</p>
+          <p className="product-price">{product.price} kr</p>
           {product.description && <p className="product-description">{product.description}</p>}
            <div className="quantity-section">
             <label htmlFor="quantity">Quantity:</label>
