@@ -70,7 +70,8 @@ const ProductCard = ({ data }) => {
 
   return (
     <>
-      <div className="product-card-container">
+    <h1 className="featured-products-title">Featured Products</h1>
+        <div className="product-card-container">
         {currentProducts && currentProducts.length > 0 ? (
           currentProducts.map((product) => {
             const id = product.id || product._id

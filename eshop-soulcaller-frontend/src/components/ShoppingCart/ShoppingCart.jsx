@@ -31,7 +31,7 @@ const ShoppingCart = () => {
     <div className="shoppingcart-overlay">
       <div className="shoppingcart-panel">
         <div className="shopping-cart">
-          <h2>Shopping Cart</h2>
+          <h2 className="shopping-cart-title">Your Cart</h2>
           {cartItems.length === 0 ? (
             <p>Your cart is empty.</p>
           ) : (
@@ -41,7 +41,7 @@ const ShoppingCart = () => {
                   <li key={item.id} className="cart-item">
                     <div className="item-details">
                       <h3>{item.name}</h3>
-                      <p>${item.price.toFixed(2)}</p>
+                      <p>{item.price.toFixed(2)} SEK</p>
                     </div>
                     <div className="quantity-controls">
                       <button onClick={() => handleQuantityChange(item.id, item.quantity - 1)}>-</button>
@@ -53,7 +53,7 @@ const ShoppingCart = () => {
                 ))}
               </ul>
               <div className="cart-total">
-                <h3>Total: ${getTotalPrice().toFixed(2)}</h3>
+                <h3>Total: {getTotalPrice().toFixed(2)} SEK</h3>
                 <button onClick={handleClearCart} className="clear-btn">Clear Cart</button>
 
                 {/* changed from <Link> to <button> */}
