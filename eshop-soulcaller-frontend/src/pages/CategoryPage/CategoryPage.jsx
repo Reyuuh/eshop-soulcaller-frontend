@@ -57,7 +57,7 @@ const CategoryPage = () => {
         <p>Visar {filteredProducts.length} produkter</p>
       </header>
 
-      <div className="products-grid">
+      <div className="product-card-container">
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
             <Link 
@@ -65,16 +65,12 @@ const CategoryPage = () => {
               key={product.id || product._id} 
               className="product-item"
             >
-              <div className="image-wrapper">
-                <img 
-                  src={product.img_url || product.image || 'https://via.placeholder.com/250'} 
-                  alt={product.name} 
-                />
-              </div>
-              <div className="product-info">
-                <h3>{product.name}</h3>
-                <p className="price">{product.price} kr</p>
-                <button className="view-btn">Visa detaljer</button>
+              <div className='product-name'>
+              <div className="product-card">
+                  <h2 className="product-name">{product.name}</h2>
+                  <img className="product-image" src={product.img_url || product.image || 'https://via.placeholder.com/250' } alt={product.name} />
+                  <p className="product-price">${product.price}</p>
+                </div>
               </div>
             </Link>
           ))
