@@ -7,12 +7,23 @@ $muted: #9ca3af;
   position: relative;
   display: inline-flex;
   align-items: center;
+  background-color: #231750;
   gap: 0.35rem;
 }
 .navbar__logout-button {
   background-color: #000000;
   border: none;
   color: #ffffff;
+  padding: 0.5rem 1rem;
+  margin-left: 12rem;
+  border-radius: 4px;
+}
+
+.navbar__login-button {
+  background-color: #544085;
+  border: none;
+  color: #ffffff;
+  margin-left: 8rem;
   padding: 0.5rem 1rem;
   border-radius: 4px;
 }

@@ -40,11 +40,12 @@
         }
 
         .product-image {
-            width: 225px;
-            height: 240px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
+        width: 100%;
+        aspect-ratio: 1 / 1;  // or 4 / 3, 16 / 9, etc.
+        object-fit: cover;
+        border-radius: 5px;
+        margin-bottom: 10px;
+}
 
         .product-name {
             font-size: 18px;

@@ -97,9 +97,11 @@ export default function Navbar() {
             {/* --- DROPDOWN END --- */}
 
             {!isLoggedIn && (
-              <>
-                <li><Link to="/login">Login</Link></li>
+              <> 
+
                 <li><Link to="/register">Register User</Link></li>
+                <li className="navbar__login-button"><Link to="/login">Login</Link></li>
+               
               </>
             )}
 

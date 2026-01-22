@@ -32,7 +32,7 @@ const Welcome = () => {
 
 
   return (
-    <section className="welcome" style={{ backgroundImage: `url(${slides[currentSlide].image})` }}>
+   <section className="welcome" style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3)), url(${slides[currentSlide].image})` }}>
       <div className="welcome-content">
         <h1>{slides[currentSlide].title}</h1>
         <p>{slides[currentSlide].description}</p>

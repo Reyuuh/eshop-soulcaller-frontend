@@ -11,7 +11,8 @@ const SingleProductPage = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [quantity, setQuantity] = useState(1)
-  const [showToast, setShowToast] = useState(false);
+  const [showToast, setShowToast] = useState(false)
+  const [toastExit, setToastExit] = useState(false)
   const { addToCart } = useCart()
 
   useEffect(() => {
@@ -33,20 +34,23 @@ const SingleProductPage = () => {
     if (id) fetchProduct()
   }, [id])
 
-    const handleAddToCart = () => {
+  const handleAddToCart = () => {
     if (product) {
       addToCart({
         ...product,
         quantity: quantity
       })
-      setQuantity(1) // Reset quantity after adding
-      setShowToast(true);
-    // Dölj den automatiskt efter 3 sekunder
-    setTimeout(() => setShowToast(false), 3000);
+      setQuantity(1)
+      setToastExit(false)
+      setShowToast(true)
+      
+      // Start exit animation after 2.7 seconds, hide after 3 seconds total
+      setTimeout(() => setToastExit(true), 2700)
+      setTimeout(() => setShowToast(false), 3000)
     }
   }
 
-    const handleQuantityChange = (value) => {
+  const handleQuantityChange = (value) => {
     const newQuantity = parseInt(value)
     if (newQuantity > 0) {
       setQuantity(newQuantity)
@@ -57,19 +61,21 @@ const SingleProductPage = () => {
   if (error) return <div className="single-product-page"><p className="error-message">{error}</p></div>
   if (!product) return <div className="single-product-page"><p>Product not found</p></div>
 
-  const img = product.img_url || 'https://via.placeholder.com/500'
+  const img = product.img_url || product.image || product.img || 'https://via.placeholder.com/500'
 
   return (
     <div className="single-product-page">
       <div className="single-product-container">
+        
         <div className="image-column">
           <img src={img} alt={product.name} className="single-product-image" />
         </div>
+        
         <div className="info-column">
           <h1 className="product-title">{product.name}</h1>
-          <p className="product-price">${product.price}</p>
+          <p className="product-price">{product.price} kr</p>
           {product.description && <p className="product-description">{product.description}</p>}
-           <div className="quantity-section">
+          <div className="quantity-section">
             <label htmlFor="quantity">Quantity:</label>
             <input 
               type="number" 
@@ -80,13 +86,13 @@ const SingleProductPage = () => {
             />
           </div>
           <button className="add-to-cart-btn" onClick={handleAddToCart}>Add to Cart</button>
-          <div className="back-link">
-            <Link to="/">← Back to shop</Link>
-            {showToast && (
-            <div className="toast-notification">
+          {showToast && (
+            <div className={`toast-notification ${toastExit ? 'exit' : ''}`}>
               ✅ {product.name} har lagts till i varukorgen!
             </div>
           )}
+          <div className="back-link">
+            <Link to="/">← Back to shop</Link>
           </div>
         </div>
       </div>
