@@ -59,9 +59,3 @@ src/
 ├── services/         # API calls
 └── assets/           # Images and static files
 ```
-
----
-
-## 📝 Notes
-
-Add your project notes, ideas, and TODO items here as you develop!
